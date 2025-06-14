@@ -12,21 +12,20 @@ public class LaundryApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.dbManager = new databasemanager();
-//         // In your LaundryApp class
-// dbManager.testDatabaseConnection();
+
         // Create initial admin user if none exists
         if (dbManager.getAllUsers().isEmpty()) {
             user admin = new user();
             admin.setId(UUID.randomUUID().toString());
             admin.setUsername("admin");
-            admin.setPassword("admin123"); // In real app, hash this
+            admin.setPassword("admin123"); // to hash this latter
             admin.setRole("admin");
             admin.setFullName("Administrator");
             dbManager.saveUser(admin);
         }
         
         primaryStage.setTitle("Laundry Management System");
-        primaryStage.setScene(new Scene(new LoginView(dbManager), 800, 600));
+        primaryStage.setScene(new Scene(new LoginView(dbManager), 300, 200));
         primaryStage.show();
     }
     
