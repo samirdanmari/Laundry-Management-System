@@ -58,20 +58,20 @@ public class order {
                    databaseValue.substring(1).toLowerCase();
         }
         
-        // Helper method to get enum from string
+        //method to get enum from string
         public static PaymentStatus fromDatabaseValue(String dbValue) {
                 if (dbValue == null || dbValue.trim().isEmpty()) {
                     return UNPAID;
                 }
 
-
-            String normalized = dbValue.trim().toLowerCase();
+            String normalized = dbValue.trim().toUpperCase(); 
             for (PaymentStatus status : PaymentStatus.values()) {
                 if (status.databaseValue.equals(normalized)) {
                     return status;
             }
         }
             System.err.println("Unknown PaymentStatus from database: " + dbValue);
+            System.err.println("Unexpected value received: '" + dbValue + "'");
             return UNPAID; // Default
     }
     }
@@ -104,7 +104,7 @@ public class order {
                 if (dbValue == null || dbValue.trim().isEmpty()) {
                     return QUEUED;
                 }
-                String normalized = dbValue.trim().toLowerCase();
+                String normalized = dbValue.trim().toUpperCase(); //before it was to lower case
                 for(OrderStatus status: OrderStatus.values()) {
                     if (status.databaseValue.equals(normalized)) {
                         return status;
@@ -138,8 +138,8 @@ public enum ServiceType {
     
     @Override
     public String toString() {
-        return databaseValue.substring(0, 1).toUpperCase() + 
-        databaseValue.substring(1).toLowerCase();
+        return databaseValue.substring(0, 1).toUpperCase(); //+ 
+        //databaseValue.substring(1).toLowerCase();
     }
     
     public double getPriceMultiplier() {
