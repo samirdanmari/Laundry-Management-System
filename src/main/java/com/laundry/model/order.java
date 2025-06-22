@@ -86,7 +86,7 @@ public class order {
         private final String databaseValue;
         
         OrderStatus(String databaseValue) {
-            this.databaseValue = databaseValue;
+            this.databaseValue = databaseValue.trim().toUpperCase();
         }
 
         public String getDatabaseValue(){
@@ -128,7 +128,7 @@ public enum ServiceType {
     private final double priceMultiplier;
     
     ServiceType(String databaseValue, double priceMultiplier) {
-        this.databaseValue = databaseValue;
+        this.databaseValue = databaseValue.trim().toUpperCase();
         this.priceMultiplier = priceMultiplier;
     }
 
@@ -138,8 +138,8 @@ public enum ServiceType {
     
     @Override
     public String toString() {
-        return databaseValue.substring(0, 1).toUpperCase(); //+ 
-        //databaseValue.substring(1).toLowerCase();
+        return databaseValue.substring(0, 1).toUpperCase() + 
+        databaseValue.substring(1).toLowerCase();
     }
     
     public double getPriceMultiplier() {
@@ -157,7 +157,7 @@ public enum ServiceType {
             return WASH_ONLY; // Default value if input is null or empty
         }
 
-        String normalized = dbValue.trim().toLowerCase();
+        String normalized = dbValue.trim().toUpperCase();
         // First try exact match with display names
         for (ServiceType type : ServiceType.values()) {
             if (type.databaseValue.equals(normalized)) {
@@ -289,7 +289,7 @@ public enum ServiceType {
 
     // Method to get string for database storage
     public String getServiceTypeString() {
-        return serviceType != null ? serviceType.toString() : serviceTypeString;
+        return serviceType != null ? serviceType.toString() : serviceTypeString;// before it was only serviceTypeString
     }
 
 
